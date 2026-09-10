@@ -1,0 +1,43 @@
+/* ---------------------------------------------------------------------------
+   Contraste WCAG AA. Va aqui, y NO bajo html.kw-motion, porque esta hoja se
+   inyecta en las 2.490 paginas y carga la ULTIMA del <head>: es el unico sitio
+   que cubre las 34 hojas del tema (about/accessibility/privacy cargan kw-s5/6/7,
+   que no llevaban el bloque y mostraban las migas en verde de marca, 3.7:1).
+   Se mantiene tambien en kw-s1/kw-s2 por si alguna pagina no lleva esta hoja.
+   !important: el tema trae main a:not([class]):not([role]){color:var(--brand-green)}
+   con especificidad (0,2,2), superior a .kw-breadcrumbs a (0,1,1).            */
+/*kw-a11y*/
+.kw-breadcrumbs a{color:#ffffffe6!important}
+.kw-breadcrumbs a:hover{color:#fff!important}
+.kw-breadcrumbs__separator{color:#ffffffcc!important}
+.sp-fit__card-num{color:#5f6b76!important;opacity:1!important}
+.footer-copyright,.footer-credit,.footer-legal-link{color:#f7f8f2b3!important}
+
+/* Kwikey motion — reveal on scroll. Solo actua cuando <html class="kw-motion">
+   (lo pone un snippet en <head> si hay IntersectionObserver y el usuario NO
+   pide movimiento reducido). Sin JS, o con reduced-motion, nada se oculta. */
+html.kw-motion body{overflow-x:clip}
+html.kw-motion .kw-m{opacity:0;transform:translate3d(0,28px,0);
+  transition:opacity .75s cubic-bezier(.2,.7,.2,1),transform .75s cubic-bezier(.2,.7,.2,1)}
+html.kw-motion .kw-m.kw-l{transform:translate3d(-64px,0,0)}
+html.kw-motion .kw-m.kw-r{transform:translate3d(64px,0,0)}
+html.kw-motion .kw-m.kw-in{opacity:1;transform:none}
+html.kw-motion .kw-m.kw-now{transition:none}
+/* la plantilla fuerza .scroll-reveal a visible con !important; aqui gana la
+   especificidad mayor para que las cabeceras tambien animen */
+html.kw-motion .kw-m.scroll-reveal:not(.kw-in){opacity:0!important;transform:translate3d(0,28px,0)!important;
+  transition:opacity .75s cubic-bezier(.2,.7,.2,1),transform .75s cubic-bezier(.2,.7,.2,1)!important}
+html.kw-motion .kw-m.scroll-reveal.kw-in{opacity:1!important;transform:none!important;
+  transition:opacity .75s cubic-bezier(.2,.7,.2,1),transform .75s cubic-bezier(.2,.7,.2,1)!important}
+/* lo que ya esta en pantalla al cargar aparece al instante, tambien si es .scroll-reveal */
+html.kw-motion .kw-m.scroll-reveal.kw-now{transition:none!important}
+/* estado inicial aplicado sin transicion (evita un fundido de salida al marcar) */
+html.kw-motion .kw-m.kw-init,html.kw-motion .kw-m.scroll-reveal.kw-init{transition:none!important}
+html.kw-motion .kw-num{font-variant-numeric:tabular-nums}
+@media (prefers-reduced-motion:reduce){
+  html.kw-motion .kw-m,html.kw-motion .kw-m.scroll-reveal:not(.kw-in){opacity:1!important;transform:none!important;transition:none!important}
+}
+/* al imprimir, todo visible aunque no se haya hecho scroll */
+@media print{
+  html.kw-motion .kw-m,html.kw-motion .kw-m.scroll-reveal:not(.kw-in){opacity:1!important;transform:none!important;transition:none!important}
+}
