@@ -25,6 +25,7 @@ DirectoryIndex index.php index.html
   # ---- Legacy article route migration ----
   RewriteRule ^blog/emergency-lockout-what-to-do-philadelphia/?$ https://www.kwikeylocksmith.com/blog/emergency-lockout-what-to-do-delaware-nearby-pa/ [R=301,L,NE,NC]
   RewriteRule ^blog/smart-lock-buying-guide/?$ https://www.kwikeylocksmith.com/blog/how-to-choose-best-smart-lock-delaware/ [R=301,L,NE,NC]
+  RewriteRule ^blog/car-key-replacement-guide/?$ https://www.kwikeylocksmith.com/blog/car-key-replacement-modern-automotive-keys/ [R=301,L,NE,NC]
 
   # ---- Force HTTPS + www canonical domain ----
   RewriteCond %{HTTPS} !=on [OR]
