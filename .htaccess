@@ -7,6 +7,8 @@ DirectoryIndex index.php index.html
 
   # ---- Legacy service-area route migration ----
   # Keep old indexed/bookmarked legacy URLs as one-hop canonical 301s.
+  # Must stay above the generic locations/<city>/ rule below, which would otherwise send this to a 404.
+  RewriteRule ^locations/upper-darby/?$ https://www.kwikeylocksmith.com/service-areas/pennsylvania/upper-darby-pa/ [R=301,L,NE,NC]
   RewriteRule ^locations/?$ https://www.kwikeylocksmith.com/service-areas/ [R=301,L,NE,NC]
   RewriteRule ^locations/([^/]+)/?$ https://www.kwikeylocksmith.com/service-areas/$1/ [R=301,L,NE,NC]
   RewriteRule ^locations/([^/]+)/([^/]+)/?$ https://www.kwikeylocksmith.com/service-areas/$1/$2/ [R=301,L,NE,NC]
